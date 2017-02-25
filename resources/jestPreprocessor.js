@@ -36,8 +36,10 @@ function compileTypeScript(filePath) {
   var program = typescript.createProgram([filePath], options, host);
 
   var diagnostics = program.getSyntacticDiagnostics();
+  var reason = '';
 
   if (diagnostics.length === 0) {
+
     diagnostics = program.getGlobalDiagnostics();
   }
 
@@ -70,13 +72,13 @@ function withLocalImmutable(filePath, jsSrc) {
 
 module.exports = {
   process: function(src, filePath) {
-    if (filePath.match(/\.ts$/) && !filePath.match(/\.d\.ts$/)) {
-      return withLocalImmutable(filePath, compileTypeScript(filePath));
-    }
-
-    if (filePath.match(/\.js$/) && ~filePath.indexOf('/__tests__/')) {
-      return withLocalImmutable(filePath, react.transform(src, {harmony: true}));
-    }
+    // if (filePath.match(/\.ts$/) && !filePath.match(/\.d\.ts$/)) {
+    //  return withLocalImmutable(filePath, compileTypeScript(filePath));
+    // }
+    //
+    // if (filePath.match(/\.js$/) && ~filePath.indexOf('/__tests__/')) {
+    //   return withLocalImmutable(filePath, react.transform(src, {harmony: true}));
+    // }
 
     return src;
   }

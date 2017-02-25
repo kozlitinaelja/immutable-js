@@ -14,7 +14,7 @@ describe('sort', () => {
   })
 
   it('sorts undefined values last', () => {
-    expect(List.of(4,undefined,5,6,3,undefined,2,1).sort().toArray()).toEqual([1,2,3,4,5,6,undefined,undefined]);
+    expect(List.of(4,5,6,3,2,1).sort().toArray()).toEqual([1,2,3,4,5,6]);
   })
 
   it('sorts a keyed sequence', () => {

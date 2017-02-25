@@ -19,7 +19,7 @@ function compileTypeScript(filePath) {
     outDir: CACHE_DIR,
     noEmitOnError: true,
     target: typescript.ScriptTarget.ES2016,
-    module: typescript.ModuleKind.CommonJS
+    module: typescript.ModuleKind.AMD
   };
 
   // re-use cached source if possible
@@ -36,7 +36,6 @@ function compileTypeScript(filePath) {
   var program = typescript.createProgram([filePath], options, host);
 
   var diagnostics = program.getSyntacticDiagnostics();
-  var reason = '';
 
   if (diagnostics.length === 0) {
 
@@ -75,10 +74,10 @@ module.exports = {
     if (filePath.match(/\.ts$/) && !filePath.match(/\.d\.ts$/)) {
       return withLocalImmutable(filePath, compileTypeScript(filePath));
     }
-    //
-    // if (filePath.match(/\.js$/) && ~filePath.indexOf('/__tests__/')) {
-    //   return withLocalImmutable(filePath, react.transform(src, {harmony: true}));
-    // }
+
+    if (filePath.match(/\.js$/) && ~filePath.indexOf('/__tests__/')) {
+      return withLocalImmutable(filePath, react.transform(src, {harmony: true}));
+    }
 
     return src;
   }

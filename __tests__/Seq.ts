@@ -50,7 +50,7 @@ describe('Seq', () => {
     var seq = Seq(alike);
     expect(Iterable.isIndexed(seq)).toBe(true);
     expect(seq.size).toBe(2);
-    expect(seq.get(1)).toBe('b');
+    expect(seq.get("1")).toBe('b');
   });
 
   it('does not accept a scalar', () => {

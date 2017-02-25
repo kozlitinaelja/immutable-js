@@ -19,7 +19,7 @@ function compileTypeScript(filePath) {
     outDir: CACHE_DIR,
     noEmitOnError: true,
     target: typescript.ScriptTarget.ES2016,
-    module: typescript.ModuleKind.AMD
+    module: typescript.ModuleKind.CommonJS
   };
 
   // re-use cached source if possible

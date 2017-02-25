@@ -72,9 +72,9 @@ function withLocalImmutable(filePath, jsSrc) {
 
 module.exports = {
   process: function(src, filePath) {
-    // if (filePath.match(/\.ts$/) && !filePath.match(/\.d\.ts$/)) {
-    //  return withLocalImmutable(filePath, compileTypeScript(filePath));
-    // }
+    if (filePath.match(/\.ts$/) && !filePath.match(/\.d\.ts$/)) {
+      return withLocalImmutable(filePath, compileTypeScript(filePath));
+    }
     //
     // if (filePath.match(/\.js$/) && ~filePath.indexOf('/__tests__/')) {
     //   return withLocalImmutable(filePath, react.transform(src, {harmony: true}));
